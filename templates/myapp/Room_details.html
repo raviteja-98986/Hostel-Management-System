@@ -1,0 +1,26 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+<div class="text-end mt-2">
+
+{% if person.room.available_slots > 0 %}
+    <a href="#" class="btn btn-success">
+        Book Slot
+    </a>
+
+{% endif %}
+<h1>{{person.room.available_slots}}</h1>
+</div>
+<div class="row">
+{% for person in persons %}
+<div class="col-md-3 mt-5 ms-5 room-card">
+<div class="card " style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Name:{{person.name}}</h5>
+    <h5 class="card-text">Age:{{person.age}}</h5>
+    <a href="#" class="btn btn-danger">Delete</a>
+  </div>
+</div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

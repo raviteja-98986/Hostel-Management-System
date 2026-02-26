@@ -1,0 +1,13 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+
+{% for person in persons %}
+<div>
+    <h6>{{ person.name }}</h6>
+    <h6>{{ person.age }}</h6>
+    <h6>{{ person.room.room_no }}</h6>
+</div>
+{% endfor %}
+
+{% endblock %}
