@@ -2,33 +2,88 @@
 
 {% block content %}
 
-<div class="container mt-5">
+<!-- Hero Section -->
+<div class="hero-section">
+  <div class="container">
+    <h1 class="hero-title" style="font-family: 'Outfit', sans-serif;">Welcome to Diphins Hostel</h1>
+    <p class="lead mb-4 text-muted mx-auto" style="max-width: 600px;">
+      Experience modern living with premium amenities, top-notch security, and a community designed for your success.
+    </p>
+    <div class="d-flex justify-content-center gap-3">
+      <a href="{% url 'rooms' %}" class="btn btn-primary-modern px-5">Explore Rooms</a>
+      <a href="#features" class="btn btn-outline-primary rounded-pill px-5 fw-bold">Learn More</a>
+    </div>
+  </div>
+</div>
+
+<div class="container mb-5" id="features">
+  <div class="row g-4">
+    <!-- Feature 1 -->
+    <div class="col-md-4">
+      <div class="glass-card p-4 h-100 border-0">
+        <div class="text-primary fs-2 mb-3"><i class="fas fa-wifi"></i></div>
+        <h4 class="fw-bold mb-3">High-Speed WiFi</h4>
+        <p class="text-muted">Uninterrupted connectivity for your studies and entertainment needs with our premium fiber
+          network.</p>
+      </div>
+    </div>
+    <!-- Feature 2 -->
+    <div class="col-md-4">
+      <div class="glass-card p-4 h-100 border-0">
+        <div class="text-success fs-2 mb-3"><i class="fas fa-shield-alt"></i></div>
+        <h4 class="fw-bold mb-3">24/7 Security</h4>
+        <p class="text-muted">Your safety is our priority. With CCTV surveillance and round-the-clock guards, you're
+          always secure.</p>
+      </div>
+    </div>
+    <!-- Feature 3 -->
+    <div class="col-md-4">
+      <div class="glass-card p-4 h-100 border-0">
+        <div class="text-danger fs-2 mb-3"><i class="fas fa-utensils"></i></div>
+        <h4 class="fw-bold mb-3">Hygienic Food</h4>
+        <p class="text-muted">Nutritious and delicious meals prepared in a clean environment to keep you healthy and
+          energized.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container py-5">
   <div class="row align-items-center">
-
-    <!-- LEFT SIDE : Hostel GIF -->
-    <div class="col-md-6 text-center">
-      <img src="https://tse1.mm.bing.net/th/id/OIP.FJQrLTeshUm1ft7_D8pmcQHaMe?pid=Api&P=0&h=180"
-           class="img-fluid rounded shadow"
-           alt="Hostel Students">
+    <div class="col-md-6 mb-4 mb-md-0">
+      <div class="position-relative">
+        <div class="glass-card p-2">
+          <img
+            src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            class="img-fluid rounded shadow-sm w-100" alt="Hostel Life">
+        </div>
+        <div class="position-absolute bottom-0 start-0 translate-middle-y ms-4 mb-4 glass-card p-3 d-none d-lg-block">
+          <h5 class="fw-bold mb-0 text-primary">500+ Happy Residents</h5>
+        </div>
+      </div>
     </div>
-
-    <!-- RIGHT SIDE : Hostel Features -->
-    <div class="col-md-6">
-      <h2 class="mb-4 fw-bold text-primary">Why Choose Our Hostel?</h2>
-
-      <ul class="list-group list-group-flush fs-5">
-        <li class="list-group-item">✅ Spacious & Clean Rooms</li>
-        <li class="list-group-item">✅ 24/7 Security</li>
-        <li class="list-group-item">✅ High-Speed WiFi</li>
-        <li class="list-group-item">✅ Hygienic Food Facility</li>
-        <li class="list-group-item">✅ Laundry Service</li>
-        <li class="list-group-item">✅ Peaceful Study Environment</li>
+    <div class="col-md-6 ps-md-5">
+      <h2 class="mb-4 fw-bold" style="font-family: 'Outfit', sans-serif;">A Living Space That Inspires</h2>
+      <p class="text-muted mb-4 fs-5">
+        We provide more than just a room. We offer a vibrant ecosystem where students grow, interact, and build lifelong
+        friendships.
+      </p>
+      <ul class="list-unstyled mb-5">
+        <li class="mb-3 d-flex align-items-center">
+          <span class="text-primary me-3"><i class="fas fa-check-circle"></i></span>
+          <span class="fw-semibold">Spacious & Clean Rooms</span>
+        </li>
+        <li class="mb-3 d-flex align-items-center">
+          <span class="text-primary me-3"><i class="fas fa-check-circle"></i></span>
+          <span class="fw-semibold">Peaceful Study Environment</span>
+        </li>
+        <li class="mb-3 d-flex align-items-center">
+          <span class="text-primary me-3"><i class="fas fa-check-circle"></i></span>
+          <span class="fw-semibold">Laundry & Maintenance Service</span>
+        </li>
       </ul>
-
     </div>
-
   </div>
 </div>
 
 {% endblock %}
-

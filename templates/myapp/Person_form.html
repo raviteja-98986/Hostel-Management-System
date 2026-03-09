@@ -1,0 +1,123 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="glass-card p-4 p-md-5 border-0">
+                <div class="text-center mb-4">
+                    <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex p-3 mb-3">
+                        <i class="fas fa-user-plus fs-3"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1" style="font-family: 'Outfit', sans-serif;">Add Room Member</h3>
+                    <p class="text-muted small">Register a new student to a hostel room</p>
+                </div>
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-muted small text-uppercase">Full Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i
+                                    class="fas fa-user text-muted"></i></span>
+                            {{ form.name }}
+                        </div>
+                        {% if form.name.errors %}
+                        <div class="text-danger x-small mt-1">
+                            {{ form.name.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Age -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-muted small text-uppercase">Age</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i
+                                    class="fas fa-calendar-alt text-muted"></i></span>
+                            {{ form.age }}
+                        </div>
+                        {% if form.age.errors %}
+                        <div class="text-danger x-small mt-1">
+                            {{ form.age.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Address -->
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-muted small text-uppercase">Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i
+                                    class="fas fa-map-marker-alt text-muted"></i></span>
+                            {{ form.address }}
+                        </div>
+                        {% if form.address.errors %}
+                        <div class="text-danger x-small mt-1">
+                            {{ form.address.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Room No -->
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-muted small text-uppercase">Room Assignment</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i
+                                    class="fas fa-door-open text-muted"></i></span>
+                            {{ form.room_no }}
+                        </div>
+                        {% if form.room_no.errors %}
+                        <div class="text-danger x-small mt-1">
+                            {{ form.room_no.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary-modern py-3">
+                            Confirm Registration
+                        </button>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{% url 'rooms' %}" class="text-muted text-decoration-none small fw-semibold">
+                            <i class="fas fa-arrow-left me-1"></i> Back to Rooms
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Local overrides for form inputs to match bootstrap 5 modern look */
+    input,
+    select,
+    textarea {
+        border: 1px solid #e2e8f0 !important;
+        border-left: none !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 0.95rem !important;
+        background-color: white !important;
+    }
+
+    input:focus,
+    select:focus {
+        box-shadow: none !important;
+        border-color: var(--primary-color) !important;
+    }
+
+    .input-group-text {
+        border: 1px solid #e2e8f0 !important;
+        background-color: #f8fafc !important;
+        color: #64748b !important;
+    }
+</style>
+{% endblock %}

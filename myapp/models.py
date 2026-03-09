@@ -1,5 +1,7 @@
+from django import forms
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.forms import ModelForm
 
 # Create your models here.
 class Room(models.Model):
@@ -25,7 +27,7 @@ class Room(models.Model):
 class Person(models.Model):
     name=models.CharField(max_length=50)
     age=models.IntegerField()
-    address=models.TextField()
+    address=models.CharField(max_length=100)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.name} {self.room}"
@@ -37,5 +39,14 @@ class Person(models.Model):
                 raise ValidationError("Room is full!")
 
         super().save(*args, **kwargs)
+class PersonForm(ModelForm):
+    class Meta:
+        model = Person
+        fields = '__all__'
 
+        widgets = {
+            'room_no': forms.TextInput(attrs={'class': 'form-control'}),
+            'sharing': forms.NumberInput(attrs={'class': 'form-control'}),
+            'available_slots': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
 
