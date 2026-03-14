@@ -4,7 +4,7 @@
     <!-- Hostel Name -->
     <a class="navbar-brand fw-bold fs-4 d-flex align-items-center" href="{% url 'home' %}">
       <span class="text-primary me-2"><i class="fas fa-hotel"></i></span>
-      <span style="font-family: 'Outfit', sans-serif; letter-spacing: -0.5px;">Diphins Hostel</span>
+      <span style="font-family: 'Outfit', sans-serif; letter-spacing: -0.5px;">Teja Hostel</span>
     </a>
 
     <!-- Mobile Toggle Button -->
@@ -25,9 +25,21 @@
             href="{% url 'rooms' %}">Rooms</a>
         </li>
         <li class="nav-item ms-lg-3">
-          <a class="btn btn-outline-danger rounded-pill px-4 fw-bold" href="#">
-            <i class="fas fa-sign-out-alt me-2"></i>Logout
+          {% if request.user.is_authenticated %}
+          <form method="post" action="{% url 'logout' %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger rounded-pill px-4 fw-bold">
+              <i class="fas fa-sign-out-alt me-2"></i>Logout
+            </button>
+          </form>
+          {% else %}
+          <a class="btn btn-outline-primary rounded-pill px-4 fw-bold me-2" href="{% url 'login_option' %}">
+            <i class="fas fa-sign-in-alt me-2"></i>Login
           </a>
+          <a class="btn btn-outline-primary rounded-pill px-4 fw-bold" href="{% url 'signup' %}">
+            <i class="fas fa-user-plus me-2"></i>Sign Up
+          </a>
+          {% endif %}
         </li>
       </ul>
     </div>

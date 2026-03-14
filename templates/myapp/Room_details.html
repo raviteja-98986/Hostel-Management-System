@@ -26,7 +26,8 @@
         <div class="room-stats mb-4">
           <div class="d-flex justify-content-between mb-2">
             <span class="text-muted fw-semibold small">OCCUPANCY</span>
-            <span class="fw-bold text-primary small">{{ persons.count }} / {{ room.sharing }}</span>
+            <span class="fw-bold text-primary small"> {{ room.sharing }} Sharing</span>
+            <span class="fw-bold text-primary small">Available Beds: {{ room.available_slots }}</span>
           </div>
           <div class="progress mb-4" style="height: 10px; border-radius: 5px; background-color: rgba(0,0,0,0.05);">
             <div class="progress-bar 
@@ -58,14 +59,16 @@
         </div>
 
         <div class="d-grid gap-2">
-          {% if room.available_slots > 0 %}
-          <a href="{% url 'add_person' %}" class="btn btn-primary-modern py-3">
-            <i class="fas fa-plus-circle me-2"></i> Register Member
-          </a>
-          {% else %}
-          <button class="btn btn-secondary-modern py-3 cursor-not-allowed" disabled>
-            <i class="fas fa-info-circle me-2"></i> Room is Full
-          </button>
+          {% if request.user.is_superuser %}
+            {% if room.available_slots > 0 %}
+            <a href="{% url 'add_person' room.room_no %}" class="btn btn-primary-modern py-3">
+              <i class="fas fa-plus-circle me-2"></i> Register Member
+            </a>
+            {% else %}
+            <button class="btn btn-secondary-modern py-3 cursor-not-allowed" disabled>
+              <i class="fas fa-info-circle me-2"></i> Room is Full
+            </button>
+            {% endif %}
           {% endif %}
         </div>
       </div>
@@ -84,14 +87,21 @@
         {% for person in persons %}
         <div class="col-md-6">
           <div class="glass-card member-card p-4 border-0 h-100">
-            <div class="d-flex align-items-center mb-4">
-              <div class="member-avatar me-3">
-                <i class="fas fa-user-graduate"></i>
+            <div class="d-flex justify-content-between align-items-start mb-4">
+              <div class="d-flex align-items-center">
+                <div class="member-avatar me-3">
+                  <i class="fas fa-user-graduate"></i>
+                </div>
+                <div>
+                  <h5 class="fw-bold mb-0 text-truncate" style="max-width: 155px;">{{ person.name }}</h5>
+                  <p class="text-muted small mb-0">Age: {{ person.age }}</p>
+                </div>
               </div>
-              <div>
-                <h5 class="fw-bold mb-0 text-truncate" style="max-width: 155px;">{{ person.name }}</h5>
-                <p class="text-muted small mb-0">Age: {{ person.age }}</p>
-              </div>
+              {% if request.user.is_superuser %}
+              <a href="{% url 'edit_person' person.id %}" class="text-primary-link" title="Edit Member">
+                <i class="fas fa-edit"></i>
+              </a>
+              {% endif %}
             </div>
 
             <div class="mb-4">
@@ -101,20 +111,22 @@
               </p>
             </div>
 
+            {% if request.user.is_superuser %}
             <div class="d-flex justify-content-between align-items-center border-top pt-3 mt-auto ">
 
               <span
                 class="badge bg-primary bg-opacity-10 text-primary border-primary border-opacity-25 border px-3 py-2 rounded-pill btn-primary"
                 style="font-size: 0.7rem;">
-                <a href="{% url 'remove_person' person.id %}" style="text-decoration: none;" title="change room">Change
+                <a href="{% url 'change_room' person.id %}" style="text-decoration: none;" title="change room">Change
                   Room</a>
 
               </span>
 
-              <a href="{% url 'remove_person' person.id %}" class="text-danger-link" title="Remove Member">
+              <a href="{% url 'delete' person.id %}" class="text-danger-link" title="Remove Member">
                 <i class="fas fa-trash-alt"></i>
               </a>
             </div>
+            {% endif %}
           </div>
         </div>
         {% empty %}
@@ -125,11 +137,14 @@
             </div>
             <h4 class="text-muted fw-bold">No Students Registered</h4>
             <p class="text-muted mx-auto mb-4" style="max-width: 300px;">
-              This room currently has no residents. You can add a new student by clicking the register button.
+              This room currently has no residents. {% if request.user.is_superuser %}You can add a new student by clicking the register button.{% endif %}
             </p>
-            {% if room.available_slots > 0 %}
-            <a href="{% url 'add_person' %}" class="btn btn-outline-primary px-5 rounded-pill fw-bold">Add First
-              Resident</a>
+            {% if request.user.is_superuser %}
+              {% if room.available_slots > 0 %}
+              <a href="{% url 'add_person' room.room_no %}" class="btn btn-outline-primary px-5 rounded-pill fw-bold">Add
+                First
+                Resident</a>
+              {% endif %}
             {% endif %}
           </div>
         </div>
@@ -189,6 +204,24 @@
 
   .text-danger-link:hover {
     background: #ef4444;
+    color: white;
+  }
+
+  .text-primary-link {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(79, 70, 229, 0.05);
+    color: var(--primary-color);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .text-primary-link:hover {
+    background: var(--primary-color);
     color: white;
   }
 

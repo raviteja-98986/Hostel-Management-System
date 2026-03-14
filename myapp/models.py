@@ -42,11 +42,5 @@ class Person(models.Model):
 class PersonForm(ModelForm):
     class Meta:
         model = Person
-        fields = '__all__'
-
-        widgets = {
-            'room_no': forms.TextInput(attrs={'class': 'form-control'}),
-            'sharing': forms.NumberInput(attrs={'class': 'form-control'}),
-            'available_slots': forms.NumberInput(attrs={'class': 'form-control'}),
-        }
+        fields = ['name', 'age', 'address']
 

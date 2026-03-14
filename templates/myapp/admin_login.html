@@ -1,0 +1,89 @@
+{% extends "myapp/base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-lg-4">
+            <div class="glass-card p-4 p-md-5 border-0 text-center position-relative overflow-hidden">
+                <!-- Decorative background elements -->
+                <div class="position-absolute top-0 start-0 w-100 bg-danger opacity-10" style="height: 5px;"></div>
+                
+                <div class="mb-4">
+                    <div class="bg-danger bg-opacity-10 text-danger rounded-circle d-inline-flex p-3 mb-3">
+                        <i class="fas fa-user-shield fs-3"></i>
+                    </div>
+                    <h3 class="fw-bold mb-1" style="font-family: 'Outfit', sans-serif;">Admin Portal</h3>
+                    <p class="text-muted small">Login with your administrator credentials</p>
+                </div>
+
+                <form method="post" action="{% url 'login_admin' %}">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3 text-start">
+                        <label class="form-label fw-bold text-muted small text-uppercase">Admin Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-user-cog text-muted"></i></span>
+                            <input type="text" name="username" class="form-control" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="mb-4 text-start">
+                        <label class="form-label fw-bold text-muted small text-uppercase">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="fas fa-key text-muted"></i></span>
+                            <input type="password" name="password" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <!-- Display general errors (like "Admins only" logic error) -->
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger py-2 small mb-4">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Display generic auth error if any field has errors but non_field_errors was empty -->
+                    {% if form.errors and not form.non_field_errors %}
+                    <div class="alert alert-danger py-2 small mb-4">
+                        Invalid username or password.
+                    </div>
+                    {% endif %}
+
+                    <div class="d-grid mb-4">
+                        <button type="submit" class="btn btn-danger py-3 fw-bold rounded-pill shadow-sm">
+                            <i class="fas fa-sign-in-alt me-2"></i> Admin Login
+                        </button>
+                    </div>
+
+                    <p class="text-muted small m-0">
+                        <a href="{% url 'login_option' %}" class="text-secondary text-decoration-none">
+                            <i class="fas fa-arrow-left me-1"></i> Back to options
+                        </a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-control {
+        border: 1px solid #e2e8f0 !important;
+        border-left: none !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 0.95rem !important;
+        background-color: white !important;
+    }
+    .form-control:focus {
+        box-shadow: none !important;
+        border-color: #dc3545 !important;
+    }
+    .input-group-text {
+        border: 1px solid #e2e8f0 !important;
+        background-color: #f8fafc !important;
+        color: #64748b !important;
+    }
+</style>
+{% endblock %}
