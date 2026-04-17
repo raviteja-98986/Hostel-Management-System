@@ -54,9 +54,14 @@ I’m continuously improving this project by adding more features and optimizing
 <img width="1896" height="903" alt="Screenshot 2026-03-14 190013" src="https://github.com/user-attachments/assets/ca650c4d-df89-430f-8236-49e268b91abe" />
 
 
-<img width="759" height="748" alt="Screenshot 2026-03-14 190036" src="https://github.com/user-attachments/assets/c59a1c29-752e-44f2-9913-5487c1930f66" />
 
 
 <img width="1719" height="879" alt="Screenshot 2026-03-14 190056" src="https://github.com/user-attachments/assets/98f2d5ac-c8ce-4dcb-a8ba-c3ca9eb401d9" />
+
+
+
+
+
+<img width="759" height="748" alt="Screenshot 2026-03-14 190036" src="https://github.com/user-attachments/assets/c59a1c29-752e-44f2-9913-5487c1930f66" />
 
 #Python #Django #BackendDevelopment #WebDevelopment #SoftwareDeveloper #OpenToWork
